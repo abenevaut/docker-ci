@@ -4,7 +4,7 @@ Docker container to run elaborated CI, build Docker in Docker, tests, deploy.
 - openssh-client
 - sshpass
 
-[Available on docker hub](https://hub.docker.com/r/abenevaut/ci) as `abenevaut/ci`
+[Available on docker hub](https://hub.docker.com/r/abenevaut/ci)
 
 ```
 docker pull abenevaut/ci
