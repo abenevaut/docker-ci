@@ -1,3 +1,5 @@
+[![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/abenevaut/ci)](https://hub.docker.com/r/abenevaut/ci/builds)
+
 # Installation
 
 This container inherited from the container `docker:latest` ([have a look at docker hub](https://hub.docker.com/_/docker));
