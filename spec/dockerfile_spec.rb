@@ -1,33 +1,31 @@
+require 'dockerspec'
 require 'dockerspec/serverspec'
 
-describe 'docker-ci' do
-  describe docker_build('.') do
+describe docker_build(path: '.') do
 
     it { should have_maintainer /Antoine Benevaut/ }
-    it { should have_cmd ['/bin/sh'] }
-
-    before(:all) do
-      image = Docker::Image.build_from_dir('.')
-
-      set :os, family: :debian
-      set :backend, :docker
-      set :docker_image, image.id
-    end
-
-    it "installs the right version of Ubuntu" do
-      expect(os_version).to include("Ubuntu 14")
-    end
-
-    def os_version
-      command("lsb_release -a").stdout
-    end
+    it { should have_cmd '/bin/sh' }
 
     describe docker_run(described_image) do
-      describe file('/etc/httpd.conf') do
-        it { should be_file }
-        it { should contain 'ServerName www.example.jp' }
-      end
-    end
 
-  end
+        describe 'OpenSSL' do
+            describe package('openssl') do
+                it { should be_installed }
+            end
+
+            it 'has openssl in the path' do
+                expect(command('which openssl').exit_status).to eq 0
+            end
+        end
+
+        describe service('docker') do
+            it { should be_enabled }
+            it { should be_running }
+        end
+
+        describe package('docker-compose') do
+            it { should be_installed }
+        end
+
+    end
 end

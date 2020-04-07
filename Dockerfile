@@ -1,4 +1,4 @@
-FROM docker:latest
+FROM docker:stable
 
 MAINTAINER Antoine Benevaut <antoine@benevaut.fr>
 
